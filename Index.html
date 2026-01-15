@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Global Friendship Website</title>
+<style>
+body{
+font-family: Arial;
+background:#f2f2f2;
+}
+.container{
+width:350px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+}
+h2{text-align:center;}
+input,button{
+width:100%;
+padding:10px;
+margin:5px 0;
+}
+button{
+background:#28a745;
+color:white;
+border:none;
+cursor:pointer;
+}
+.profile{
+display:none;
+}
+.user{
+background:#eee;
+padding:10px;
+margin:5px 0;
+border-radius:5px;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="signup">
+<h2>Sign Up</h2>
+<input id="name" placeholder="Full Name">
+<input id="country" placeholder="Country">
+<input id="email" placeholder="Email">
+<button onclick="signup()">Create Account</button>
+</div>
+
+<div class="container profile" id="profile">
+<h2>Your Profile</h2>
+<p id="pname"></p>
+<p id="pcountry"></p>
+<p id="pemail"></p>
+
+<h3>Friendship Box</h3>
+<div id="users"></div>
+</div>
+
+<script>
+let users = [
+{name:"John",country:"USA"},
+{name:"Amit",country:"India"},
+{name:"Sara",country:"UK"},
+{name:"Ali",country:"Dubai"}
+];
+
+function signup(){
+let name=document.getElementById("name").value;
+let country=document.getElementById("country").value;
+let email=document.getElementById("email").value;
+
+if(name==""||country==""||email==""){
+alert("All fields required");
+return;
+}
+
+document.getElementById("signup").style.display="none";
+document.getElementById("profile").style.display="block";
+
+document.getElementById("pname").innerHTML="Name: "+name;
+document.getElementById("pcountry").innerHTML="Country: "+country;
+document.getElementById("pemail").innerHTML="Email: "+email;
+
+showUsers();
+}
+
+function showUsers(){
+let html="";
+for(let i=0;i<users.length;i++){
+html+=`<div class="user">
+<b>${users[i].name}</b> - ${users[i].country}<br>
+<button onclick="request('${users[i].name}')">Send Friend Request</button>
+</div>`;
+}
+document.getElementById("users").innerHTML=html;
+}
+
+function request(name){
+alert("Friend request sent to "+name);
+}
+</script>
+
+</body>
+</html>
